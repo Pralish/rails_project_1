@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+
+  before_action :get_post, only:  [:edit, :show, :update, :destroy]
   http_basic_authenticate_with name: 'pralish', password: 'password', except: [:index, :show]
 
 
@@ -7,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
 
@@ -23,23 +25,28 @@ class PostsController < ApplicationController
   end 
 
   def edit
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     @post.update(post_params)
     redirect_to @post
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     @post.destroy
     redirect_to welcome_index_path
   end
 
 
-  private def post_params
+  private 
+  def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def get_post
+    @post = Post.find(params[:id]) 
   end
 end

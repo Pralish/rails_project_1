@@ -1,0 +1,17 @@
+
+
+<h2>Your Blogs</h2>
+
+<div class= "container">
+    <% @posts.each do |post| %>
+        <div class="card">
+        <div class = "card-body card-bg-light ">
+            <h2 ><%= post.title %></h2>
+            <%= post.body %><br>
+            <%= link_to "Read More" , post_path(post) , :class => ' btn  btn-sm btn-dark'%>
+        </div>
+        </div>
+    <%end%>
+</div>
+
+

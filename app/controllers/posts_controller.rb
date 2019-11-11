@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+  
   end
 
   def index
@@ -19,10 +20,9 @@ class PostsController < ApplicationController
   def create 
     #render plain: params[:post].inspect
     @post = Post.new(post_params)
-    
     if @post.save
       redirect_to @post
-     else
+    else
        render :new
     end
   end 
@@ -34,8 +34,11 @@ class PostsController < ApplicationController
   def update
     # @post = Post.find(params[:id])
    if @post.update(post_params)
-    redirect_to @post
+    
+    redirect_to @post 
    else
+    flash[:error] = "updated suceessfully"
+    flash.keep
     render 'edit'
    end
   end
@@ -43,7 +46,7 @@ class PostsController < ApplicationController
   def destroy
     # @post = Post.find(params[:id])
     @post.destroy
-    redirect_to welcome_index_path
+    redirect_to posts_path
   end
 
 

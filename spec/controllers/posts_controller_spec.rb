@@ -2,17 +2,26 @@ require 'rails_helper'
 
 RSpec.describe PostsController do
 
-    describe "POST #create" do
- 
-        context "with valid params" do
-            it "should  create  post " do
-                expect{ post 'create', :params => { post: FactoryGirl.attributes_for(:post)  }}.to change(Post, :count).by(1)
-                expect(response.status).to eq(302)
-            end
 
-            it {should permit(:title, :body).for(:create, :params => { post: { title: "name", body: "Test"}  } )}
-        end          
-    end
+    # describe "POST #create" do
+    #     let!(:invalid_post) { FactoryGirl.attributes_for(:invalid_post)  }
+    #     let!(:valid_post) { FactoryGirl.attributes_for(:post)  }
+
+    #     context "with valid params" do
+    #         it "should  create new post" do
+    #             post :create,  params: { post:  valid_post } 
+    #             expect(Post.all.count).to eq(1)
+    #         end
+
+    #     end     
+        
+    #     context "with invalid params" do
+    #         it "should not create new post" do
+    #          post :create,  params: { post:  invalid_post } 
+    #         end
+    #     end
+    # end
+
 
     describe "DELETE #delete" do
         it 'should delete' do

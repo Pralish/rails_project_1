@@ -1,26 +1,29 @@
 class PostsController < ApplicationController
 
   before_action :get_post, only:  [:edit, :show, :update, :destroy]
-  http_basic_authenticate_with name: 'pralish', password: 'password', except: [:index, :show]
+  # http_basic_authenticate_with name: 'pralish', password: 'password', except: [:index, :show]
 
 
   def new
     @post = Post.new
+  
+  end
+
+  def index
+    @posts = Post.all
   end
 
   def show
     # @post = Post.find(params[:id])
   end
 
-
   def create 
     #render plain: params[:post].inspect
     @post = Post.new(post_params)
-
     if @post.save
       redirect_to @post
     else
-      render new_post_path
+       render :new
     end
   end 
 
@@ -30,14 +33,20 @@ class PostsController < ApplicationController
 
   def update
     # @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to @post
+   if @post.update(post_params)
+    
+    redirect_to @post 
+   else
+    flash[:error] = "updated suceessfully"
+    flash.keep
+    render 'edit'
+   end
   end
 
   def destroy
     # @post = Post.find(params[:id])
     @post.destroy
-    redirect_to welcome_index_path
+    redirect_to posts_path
   end
 
 

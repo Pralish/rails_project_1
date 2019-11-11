@@ -41,14 +41,21 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+gem "pry-rails"
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'rspec-rails'
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'faker'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 
 end
 

@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'posts/new'
-  get 'posts/index', to: 'posts#index'
-
-    
   resources :posts do 
     resources :comments
   end

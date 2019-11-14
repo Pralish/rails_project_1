@@ -20,7 +20,4 @@ RSpec.describe "routing", :type => :routing do
 
         it {should route(:patch, "posts/1").to("posts#update", id: 1)}
 
-
-        
-
 end

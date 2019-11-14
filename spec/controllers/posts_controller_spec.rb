@@ -28,8 +28,9 @@ RSpec.describe PostsController do
             # @post = Post.create(title: "name", body: "Test")
             @post = create(:post)
             expect{delete 'destroy',  { params: { id: @post.id }}}.to change(Post, :count).by(-1)
-           expect(response).to redirect_to(welcome_index_path)
+           expect(response).to redirect_to(posts_path)
         end
     end
 
+    
 end

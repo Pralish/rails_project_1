@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
 
   before_action :get_post, only:  [:edit, :show, :update, :destroy]
-  # http_basic_authenticate_with name: 'pralish', password: 'password', except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   
   end
 
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
   def create 
     #render plain: params[:post].inspect
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to @post
     else

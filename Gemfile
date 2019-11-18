@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
 
+gem 'activeadmin'
+
 gem 'devise-bootstrap-views'
 
 # Use Active Storage variant

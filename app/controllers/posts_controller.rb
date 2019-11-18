@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def create 
     #render plain: params[:post].inspect
     @post = current_user.posts.build(post_params)
+    authorize @post
     if @post.save
       redirect_to @post
     else
@@ -29,10 +30,12 @@ class PostsController < ApplicationController
 
   def edit
     # @post = Post.find(params[:id])
+
   end
 
   def update
     # @post = Post.find(params[:id])
+    authorize @post
    if @post.update(post_params)
     
     redirect_to @post 
@@ -45,6 +48,7 @@ class PostsController < ApplicationController
 
   def destroy
     # @post = Post.find(params[:id])
+    authorize @post
     @post.destroy
     redirect_to posts_path
   end

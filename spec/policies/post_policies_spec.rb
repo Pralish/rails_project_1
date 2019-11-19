@@ -3,8 +3,6 @@ require 'rails_helper'
 describe PostPolicy do
     subject { PostPolicy.new(user, post) }
   
-    
-  
     context "for a visitor" do
       let(:user) { nil }
       let(:post) { FactoryGirl.create(:post) }

@@ -12,28 +12,22 @@
 
   <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">BlogPost</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <%= link_to 'Blogzz' , posts_path , :class => "navbar-brand" %>
+  
+    <ul class="navbar-nav mr-auto"></ul>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto ">
-      <li>
+    <ul class="navbar-nav navbar-right align-items-center">
+     <li>
         <%= link_to 'Home' , posts_path%>
-      </li>
-    
-    </ul>
-
-    <ul class="navbar-nav navbar-right">
-    <li>
-      <%= link_to 'Create Blog', new_post_path %>
     </li>
+
     <%if user_signed_in?%>
       <li>
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-        <%= current_user.name%>
+        <% if current_user.avatar.attached?%>
+          <img class= "nav-profile" src = "<%= (url_for(current_user.avatar))%>">
+        <%end%>
       </li>
     <%else%>
       <li>
@@ -48,9 +42,16 @@
     
   </div>
 </nav>
- 
-  <%= render 'layouts/alerts'%>
-    <%= yield %>
+<div class = "row mt-4">
+  <div class = "col-3">
+      <%= render 'layouts/alerts'%>
+  </div>
+  <div class = "col-6">
+      <%= yield %>
+  </div>
+<div>
+
+
 
   </body>
 </html>

@@ -1,0 +1,70 @@
+<%= form_for :post, url: posts_path do |f| %>
+    <% if @post.errors.any?%>
+        <% @post.errors.full_messages.each do |msg| %>
+            <div class="alert alert-danger"><%= msg %></div>
+        <% end %>
+    <% end %>
+
+    <div class = "card">
+        <div class = "card-header" style = "padding: 10px 10px 0 10px;">
+             <h5 class = "card-title">Your Post<h5>
+        </div>
+        <div class = "card-body" style = "padding: 8px 15px; ">
+        <div class = "row align-items-end">
+            <div class = "col-auto">
+                <% if current_user.avatar.attached?%>
+                    <img class= "nav-profile" src = "<%= (url_for(current_user.avatar))%>">
+                <%end%>
+            </div>
+
+            <div class = "col-7">
+                <%= f.text_field :body,  :class => 'post-input', :placeholder => "What's on your mind?"%>
+            </div>
+                 
+                <label class = "upload-image col-auto">
+                    <i class = "fa fa-image fa-2x" > Photo</i>
+                    <span style= "display: none;">
+                        <%= f.file_field :images, multiple: true, id: "browse", :onchange => "previewFiles()" %>
+                    </span>
+                </label>
+            </div>
+            <hr style = "margin: 10px;">
+    
+             <%= f.submit ("Submit") , :class => 'btn btn-primary post-btn' %>
+        </div>
+           
+        </div>
+         <div id = "preview"></div>
+    
+<% end %>
+<script type = "text/javascript">
+function previewFiles() {
+
+  var preview = document.querySelector('#preview');
+  var files   = document.querySelector('input[type=file]').files;
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        var image = new Image();
+        image.height = 100;
+        image.title = file.name;
+        image.src = this.result;
+        preview.appendChild( image );
+      }, false);
+
+      reader.readAsDataURL(file);
+    
+
+  }
+
+  if (files) {
+    [].forEach.call(files, readAndPreview);
+  }
+
+}
+</script>

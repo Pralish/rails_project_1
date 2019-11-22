@@ -28,6 +28,12 @@ gem 'activeadmin'
 
 gem 'devise-bootstrap-views'
 
+gem 'pundit'
+
+gem 'font-awesome-rails'
+
+gem 'kaminari'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -62,6 +68,7 @@ group :test do
   gem 'webdrivers'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'pundit-matchers'
 
 end
 

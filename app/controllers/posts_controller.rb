@@ -1,27 +1,25 @@
 class PostsController < ApplicationController
 
   before_action :get_post, only:  [:edit, :show, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
 
-
-  def new
-    @post = current_user.posts.build
-  
-  end
 
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page])
+    @post = current_user.posts.build    
   end
 
   def show
     # @post = Post.find(params[:id])
-  end
+
+   end
 
   def create 
     #render plain: params[:post].inspect
     @post = current_user.posts.build(post_params)
+    authorize @post
     if @post.save
-      redirect_to @post
+      redirect_to posts_path
     else
        render :new
     end
@@ -29,10 +27,12 @@ class PostsController < ApplicationController
 
   def edit
     # @post = Post.find(params[:id])
+
   end
 
   def update
     # @post = Post.find(params[:id])
+    authorize @post
    if @post.update(post_params)
     
     redirect_to @post 
@@ -45,6 +45,7 @@ class PostsController < ApplicationController
 
   def destroy
     # @post = Post.find(params[:id])
+    authorize @post
     @post.destroy
     redirect_to posts_path
   end
@@ -52,7 +53,7 @@ class PostsController < ApplicationController
 
   private 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:body, images: [])
   end
 
   def get_post

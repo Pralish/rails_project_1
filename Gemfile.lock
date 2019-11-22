@@ -113,6 +113,8 @@ GEM
     faker (2.7.0)
       i18n (>= 1.6, < 1.8)
     ffi (1.11.1)
+    font-awesome-rails (4.7.0.5)
+      railties (>= 3.2, < 6.1)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
@@ -178,6 +180,10 @@ GEM
     public_suffix (4.0.1)
     puma (4.3.0)
       nio4r (~> 2.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
+    pundit-matchers (1.6.0)
+      rspec-rails (>= 3.0.0)
     rack (2.0.7)
     rack-proxy (0.6.5)
       rack
@@ -319,11 +325,15 @@ DEPENDENCIES
   devise-bootstrap-views
   factory_girl_rails
   faker
+  font-awesome-rails
   jbuilder (~> 2.7)
+  kaminari
   listen (>= 3.0.5, < 3.2)
   pg
   pry-rails
   puma (~> 4.1)
+  pundit
+  pundit-matchers
   rails (~> 6.0.1)
   rails-controller-testing
   rspec-rails

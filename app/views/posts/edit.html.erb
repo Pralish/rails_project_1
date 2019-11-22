@@ -1,9 +1,6 @@
 <%= form_for :post, url: post_path(@post.id), method: :patch do |f| %>
     <div class = "container">
-    <p>
-        <%= f.label :title %><br>
-        <%= f.text_field :title,  :class => 'form-control'%>    
-    </p>
+    
 
     <p>
         <%= f.label :body %><br>

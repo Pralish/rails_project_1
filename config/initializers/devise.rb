@@ -15,15 +15,6 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
 
-  config.jwt do |jwt|
-    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.dispatch_requests = [
-      ['POST', %r{^/api/users/sign_in$}],
-      ['GET', %r{^/$}]
-  ]
-  jwt.request_formats = { user: [:json] }
-  jwt.expiration_time = 8.hours.to_i
-  end
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

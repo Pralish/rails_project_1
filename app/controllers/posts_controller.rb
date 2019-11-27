@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
 
-  before_action :get_post, only:  [:edit, :show, :update, :destroy]
   before_action :authenticate_user!
+  before_action :get_post, only:  [:edit, :show, :update, :destroy]
 
 
   def index
     @posts = Post.page(params[:page])
-    @post = current_user.posts.build    
+    @post = current_user.posts.build  
+      
   end
 
   def show
@@ -18,10 +19,13 @@ class PostsController < ApplicationController
     #render plain: params[:post].inspect
     @post = current_user.posts.build(post_params)
     authorize @post
-    if @post.save
-      redirect_to posts_path
-    else
-       render :new
+    respond_to do |format|
+      if @post.save
+        format.js
+        format.html {redirect_to posts_path}
+      else
+        format.html {render :new}
+      end
     end
   end 
 

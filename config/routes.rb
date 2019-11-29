@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   end
   post 'login', to: 'api/authentication#login'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # root 'posts_path'
 end

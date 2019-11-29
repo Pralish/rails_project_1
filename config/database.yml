@@ -17,6 +17,7 @@
 development:
   adapter: postgresql
   encoding: unicode
+  # host: db
   database: db
   pool: 5
   username: pralish

@@ -1,0 +1,9 @@
+<% @post.comments.each do |comment|%>
+    <div id = "<% comment.id %>">
+            <h4><%= comment.user.name%></h4>
+            <p> <%= comment.body %></p>
+            <% if policy(comment).destroy?%>
+                <%= link_to 'Delete Comment', [comment.post, comment], method: :delete, remote: true, class: "delete" %>
+            <%end%>
+    </div>
+<%end%>

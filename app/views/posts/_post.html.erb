@@ -1,0 +1,38 @@
+
+ <div class="card mb-3 border-dark">
+            <div class = "card-body  px-0 pt-0 card-bg-light ">
+                <div class = "row">
+                    <% post.images.each do |image|%>
+                        <div class = "col-lg-12 ">
+                            <%= image_tag image , :style => "width: 100%;"%>
+                        </div>
+                     <%end%>
+                </div>
+                <%= post.body %>
+                <%= link_to "Read More" , post_path(post), style: "font-size: 13px; margin: 0;"%>
+                <% if policy(post).destroy?%>
+                    <%= link_to 'Delete Post' , post_path(post) , method: :delete, style: "font-size: 13px; margin: 0;", remote: true %>
+                <%end%>
+                <hr class= "mt-0 mb-0">
+
+                <div >
+                    <%post.comments.last(2).each do |comment|%>
+                        <h5 style = "display: inline-block"><%= comment.user.name%></h5>
+                        <p style = "display: inline-block"><%= comment.body%></p>
+                        <br>
+                    <%end%>
+                </div>
+
+                 <%= form_for([post, post.comments.build ], remote: true) do |form| %>
+                        <div class = "row align-items-center">
+                            <% if current_user.avatar.attached?%>
+                                <img class= "nav-profile" src = "<%= (url_for(current_user.avatar))%>">
+                            <%end%>
+
+                             <%= form.text_field :body, class: "comment col-9" , :placeholder => "Write your commentsu"%>
+                        </div>   
+                <% end %>
+            </div>
+        </div>
+
+        

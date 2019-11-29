@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :comments
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+        
+# self.skip_session_storage = [:http_auth, :params_auth]
 
   
 end

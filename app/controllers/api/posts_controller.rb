@@ -1,7 +1,8 @@
-class Api::PostsController < ApplicationController
+class Api::PostsController < Api::BaseController
+  before_action :authorize_request
     def index
         @posts = Post.all
-        render json: @posts
+        render :index
     end
 
     def show

@@ -5,11 +5,15 @@ class CommentsController < ApplicationController
         @post = Post.find(params[:post_id])
         @comment = @post.comments.create(comment_params)
         @comment.user_id = current_user.id
+
+        respond_to do |format|
         if @comment.save
-            redirect_to request.referer
+            format.js
+             format.html {redirect_to request.referer}
           else
             flash.now[:danger] = "error"
           end
+        end
         
     end
 
@@ -18,7 +22,10 @@ class CommentsController < ApplicationController
         @comment = @post.comments.find(params[:id])
         authorize @comment
         @comment.destroy
-        redirect_to post_path(@post)
+        respond_to do |format|
+            format.js
+            format.html {redirect_to post_path(@post)}
+        end
     end
 
     private def comment_params

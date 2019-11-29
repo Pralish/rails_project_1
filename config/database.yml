@@ -14,12 +14,15 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-development:
+
+default: &default
   adapter: postgresql
   encoding: unicode
-  # host: db
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS" { 5 } %>
+
+development:
+  <<: *default
   database: db
-  pool: 5
   username: pralish
   password:
   timeout: 5000
@@ -50,3 +53,10 @@ test:
   username: pralish
   password:
   timeout: 5000
+
+  production:
+     <<: *default
+    database: db
+    username: pralish
+    password:
+    url: <%= ENV['DATABASE_URL'] %>

@@ -2,17 +2,18 @@ class Api::PostsController < Api::BaseController
   before_action :authorize_request
     def index
         @posts = Post.all
-        render :index
+        # render :indexpost
+        render json: @posts 
     end
 
     def show
         @post = Post.find(params[:id])
-        render json: {data: @post}
+        render json: @post
     end
 
 
   def create 
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     
     if @post.save
       render json: {data: @post }
@@ -20,6 +21,8 @@ class Api::PostsController < Api::BaseController
         render json: {data: @post.errors}
     end
   end 
+
+
 
 
     private 

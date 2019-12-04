@@ -10,6 +10,15 @@ class PostsController < ApplicationController
       
   end
 
+  def search
+    if params[:search].blank?
+      redirect_to(root_path, aleart: "Empty field") and return
+    else
+       @parameter = params[:search].downcase
+      @results = User.all.where("lower(name) LIKE ?" , "%" + @parameter + "%")
+    end
+  end
+
   def show
     # @post = Post.find(params[:id])
 

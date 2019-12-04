@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   post 'login', to: 'api/authentication#login'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'posts#index'
+  get '/search' => 'posts#search', :as => 'search_posts'
+  get '/api/search' => 'api/posts#search'
 
 end

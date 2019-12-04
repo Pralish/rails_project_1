@@ -14,8 +14,17 @@
 
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <%= link_to 'Blogzz' , posts_path , :class => "navbar-brand" %>
+
   
-    <ul class="navbar-nav mr-auto"></ul>
+    <ul class="navbar-nav mr-auto">
+    <li>
+      <%= form_tag(search_posts_path, method: "get" ) do %>
+        <%= search_field_tag :search, params[:search], class: "form-control"%>
+        <%= button_tag "submit", name: nil%>
+
+      <%end%>
+    </li>
+    </ul>
 
     <ul class="navbar-nav navbar-right align-items-center">
      <li>

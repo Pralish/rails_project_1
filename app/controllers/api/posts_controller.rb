@@ -20,6 +20,17 @@ class Api::PostsController < Api::BaseController
     end
   end 
 
+  def search
+    if params[:q].blank?
+      render json: {error: 'empty field'}
+    else
+      @parameter = params[:q].downcase
+      @posts = Post.all.where("lower(body) LIKE ?" , "%" + @parameter + "%")
+      @users = User.all.where("lower(name) LIKE ?" , "%" + @parameter + "%")
+      render json: {posts: @posts, users: @users}
+    end
+  end
+
   def update
     @post.update(post_params)
 
